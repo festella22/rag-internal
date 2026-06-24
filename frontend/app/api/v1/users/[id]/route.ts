@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createClient } from '@/lib/supabase/server';
+import { createClient, createServiceClient } from '@/lib/supabase/server';
 
 async function getUser(req: NextRequest) {
   const token = (req.headers.get('authorization') ?? '').replace('Bearer ', '');
@@ -35,10 +35,18 @@ export async function PUT(req: NextRequest) {
   if (!user) return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
 
   const body = await req.json().catch(() => ({}));
-  const supabase = await createClient();
 
-  await supabase.auth.updateUser({
-    data: { full_name: `${body.firstName ?? ''} ${body.lastName ?? ''}`.trim() },
+  // Support both {fullName} (from FullNameDialog) and {firstName, lastName} (from profile page)
+  const fullName = (
+    body.fullName ??
+    `${body.firstName ?? ''} ${body.lastName ?? ''}`.trim()
+  ).trim();
+
+  // Use service role admin client — server-side auth.updateUser requires cookies
+  // but this route uses Bearer token auth, so we update via admin API instead.
+  const svc = await createServiceClient();
+  await svc.auth.admin.updateUserById(user.id, {
+    user_metadata: { full_name: fullName },
   });
 
   return NextResponse.json({ success: true });
