@@ -6,9 +6,6 @@ const electronStaticExport =
 const nextConfig = {
     ...(electronStaticExport ? { output: 'export' } : {}),
     trailingSlash: true,
-    // Prevent Vercel/Next.js from 308-redirecting API proxy calls to add a trailing slash.
-    // trailingSlash still applies to page routes; this only skips the automatic redirect.
-    skipTrailingSlashRedirect: true,
     /**
      * Static export does not emit per-slug callback HTML. Rewrites map
      * `/toolsets/oauth/callback/:slug` and `/connectors/oauth/callback/:slug` → the

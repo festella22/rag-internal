@@ -358,7 +358,7 @@ export const KnowledgeBaseApi = {
 
   // List all knowledge bases
   async listKnowledgeBases() {
-    const { data } = await apiClient.get<{ knowledgeBases: Record<string, unknown>[]; total: number }>(BASE_URL);
+    const { data } = await apiClient.get<{ knowledgeBases: Record<string, unknown>[]; total: number }>(`${BASE_URL}/`);
     return data;
   },
 
@@ -370,7 +370,7 @@ export const KnowledgeBaseApi = {
       createdAtTimestamp: number;
       updatedAtTimestamp: number;
       userRole: string;
-    }>(BASE_URL, {
+    }>(`${BASE_URL}/`, {
       kbName,
       kbDescription: kbDescription || '',
       // isPrivate: false, // Reserved for future use - will distinguish workspace vs private
