@@ -1,6 +1,7 @@
 import { NextRequest } from 'next/server';
 import OpenAI from 'openai';
 import { createClient, createServiceClient } from '@/lib/supabase/server';
+import { retrieve, type RetrievedChunk } from '@/lib/rag';
 
 export const runtime = 'nodejs';
 export const maxDuration = 60;
@@ -23,6 +24,7 @@ export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => ({}));
   const query: string = body.query ?? '';
   const modelName: string = body.modelName ?? 'gpt-4o-mini';
+  const collectionId: string | undefined = body.collectionId ?? undefined;
   const startTime = Date.now();
 
   if (!query.trim()) {
@@ -65,26 +67,63 @@ export async function POST(req: NextRequest) {
         title,
       }));
 
+      // Retrieve relevant chunks from indexed documents
+      await writer.write(sseChunk('status', {
+        status: 'retrieving',
+        message: 'Searching documents...',
+      }));
+
+      let chunks: RetrievedChunk[] = [];
+      try {
+        chunks = await retrieve({ query, collectionId, topK: 6 });
+      } catch {
+        // Retrieval failure is non-fatal — continue without context
+      }
+
       await writer.write(sseChunk('status', {
         status: 'generating',
         message: 'Generating response...',
       }));
 
+      // Build a grounded system prompt when we have retrieved context
+      const systemPrompt = chunks.length > 0
+        ? `You are PIP, an AI assistant for PI Partners — an internal knowledge search platform.
+Answer the user's question using only the provided context from their documents.
+Be concise and accurate. Cite sources using [1], [2], etc. when referencing specific content.
+If the answer isn't in the context, say so clearly rather than guessing.
+
+Context from your documents:
+${chunks.map((c, i) => `[${i + 1}] ${c.content}`).join('\n\n')}`
+        : `You are PIP, an AI assistant for PI Partners — an internal knowledge search platform.
+Be concise, accurate, and helpful.
+Note: no relevant documents were found for this query. You may answer from general knowledge but make clear you are not drawing from indexed documents.`;
+
       const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+      const effectiveModel =
+        modelName.startsWith('gpt') || modelName.startsWith('o')
+          ? modelName
+          : 'gpt-4o-mini';
 
       const stream = await openai.chat.completions.create({
-        model: modelName.startsWith('gpt') || modelName.startsWith('o') ? modelName : 'gpt-4o-mini',
+        model: effectiveModel,
         messages: [
-          {
-            role: 'system',
-            content: 'You are PIP, an AI assistant for PI Partners — an internal knowledge search platform. Be concise, accurate, and helpful.',
-          },
+          { role: 'system', content: systemPrompt },
           { role: 'user', content: query },
         ],
         stream: true,
+        temperature: 0.2,
+        max_tokens: 1500,
       });
 
       let accumulated = '';
+
+      const citationMeta = chunks.map((c, i) => ({
+        index: i + 1,
+        id: c.id,
+        documentId: c.document_id,
+        similarity: Math.round(c.similarity * 100) / 100,
+        preview: c.content.slice(0, 150),
+      }));
 
       for await (const chunk of stream) {
         const text = chunk.choices[0]?.delta?.content ?? '';
@@ -93,13 +132,13 @@ export async function POST(req: NextRequest) {
           await writer.write(sseChunk('answer_chunk', {
             chunk: text,
             accumulated,
-            citations: [],
+            citations: citationMeta,
           }));
         }
       }
 
       // Save assistant message
-      const { data: assistantMsg } = await svc
+      await svc
         .from('messages')
         .insert({
           conversation_id: conversationId,
@@ -130,7 +169,7 @@ export async function POST(req: NextRequest) {
             messageType: m.role === 'user' ? 'user_query' : 'bot_response',
             content: m.content,
             contentFormat: 'MARKDOWN',
-            citations: [],
+            citations: citationMeta,
             followUpQuestions: [],
             referenceData: [],
             modelInfo: { model: modelName, provider: 'openai' },
@@ -154,6 +193,7 @@ export async function POST(req: NextRequest) {
           requestId: conversationId,
           timestamp: now,
           duration: Date.now() - startTime,
+          retrievedChunks: chunks.length,
         },
       }));
     } catch (err) {

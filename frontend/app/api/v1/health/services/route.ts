@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 
 export async function GET() {
   return NextResponse.json({
-    status: 'ok',
+    status: 'healthy',
     services: {
       query: 'healthy',
       connector: 'healthy',
