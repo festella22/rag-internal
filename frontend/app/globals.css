@@ -85,38 +85,39 @@
 :root, .light, .light-theme {
   --effects-translucent: rgba(255, 255, 255, 0.8);
   --tokens-colors-surface: rgba(139, 139, 139, 0.084);
-  --accent-surface: rgba(18, 249, 157, 0.04);
+  --accent-surface: rgba(0, 36, 112, 0.04);
   --white-to-dark: rgba(0, 0, 0, 0.074);
-  --emerald-1: #f5fefb;
-  --emerald-2: #edfdf8;
-  --emerald-3: #d4f7eb;
-  --emerald-4: #bbf0dd;
-  --emerald-5: #9fe7cd;
-  --emerald-6: #7edabb;
-  --emerald-7: #53c9a4;
-  --emerald-8: #12b589;
-  --emerald-9: #047857;
-  --emerald-10: #10674C;
-  --emerald-11: #035e44;
-  --emerald-12: #0f3d2c;
+  /* PIP Navy scale (light mode) */
+  --emerald-1: #f0f4fc;
+  --emerald-2: #dde8f7;
+  --emerald-3: #bdd0f2;
+  --emerald-4: #9ab8ed;
+  --emerald-5: #6a96e6;
+  --emerald-6: #3a73d9;
+  --emerald-7: #1a56c4;
+  --emerald-8: #0a3da5;
+  --emerald-9: #002470;
+  --emerald-10: #001a54;
+  --emerald-11: #001040;
+  --emerald-12: #00122A;
 
-  /* Alpha variants  */
-  --emerald-a1: rgba(4, 120, 87, 0.024);
-  --emerald-a2: rgba(4, 120, 87, 0.06);
-  --emerald-a3: rgba(4, 120, 87, 0.13);
-  --emerald-a4: rgba(4, 120, 87, 0.22);
-  --emerald-a5: rgba(4, 120, 87, 0.32);
-  --emerald-a6: rgba(4, 120, 87, 0.44);
-  --emerald-a7: rgba(4, 120, 87, 0.58);
-  --emerald-a8: rgba(4, 120, 87, 0.76);
-  --emerald-a9: rgba(4, 120, 87, 1);
-  --emerald-a10: rgba(16, 103, 76, 1);
-  --emerald-a11: rgba(3, 94, 68, 1);
-  --emerald-a12: rgba(15, 61, 44, 1);
+  /* Alpha variants */
+  --emerald-a1: rgba(0, 36, 112, 0.024);
+  --emerald-a2: rgba(0, 36, 112, 0.06);
+  --emerald-a3: rgba(0, 36, 112, 0.13);
+  --emerald-a4: rgba(0, 36, 112, 0.22);
+  --emerald-a5: rgba(0, 36, 112, 0.32);
+  --emerald-a6: rgba(0, 36, 112, 0.44);
+  --emerald-a7: rgba(0, 36, 112, 0.58);
+  --emerald-a8: rgba(0, 36, 112, 0.76);
+  --emerald-a9: rgba(0, 36, 112, 1);
+  --emerald-a10: rgba(0, 26, 84, 1);
+  --emerald-a11: rgba(0, 16, 64, 1);
+  --emerald-a12: rgba(0, 18, 42, 1);
   --emerald-contrast: #ffffff;
-  --emerald-surface: rgba(245, 254, 251, 0.8);
-  --emerald-indicator: #047857;
-  --emerald-track: #047857;
+  --emerald-surface: rgba(240, 244, 252, 0.8);
+  --emerald-indicator: #002470;
+  --emerald-track: #002470;
 
   --page-background: #dcdcdc;
   --file-icon-fill: #ffffff;
@@ -128,39 +129,40 @@
 :root[class~="dark"] {
   --effects-translucent: rgba(29, 29, 33, 0.70);
   --tokens-colors-surface: rgba(0, 0, 0, 0.25);
-  --accent-surface: rgba(18, 249, 157, 0.04);
+  --accent-surface: rgba(0, 36, 112, 0.08);
   --white-to-dark: rgba(0, 0, 0, 0.25);
-  --emerald-1: #0d1512;
-  --emerald-2: #0f1f1a;
-  --emerald-3: #0c3126;
-  --emerald-4: #063f31;
-  --emerald-5: #084A35;
-  --emerald-6: #145c49;
-  --emerald-7: #1e6d58;
-  --emerald-8: #268169;
-  --emerald-9: #047857;
-  --emerald-10: #17906c;
-  --emerald-11: #3dd9a0;
-  --emerald-12: #EEEEEE;
+  /* PIP Navy scale (dark mode) */
+  --emerald-1: #0a0e1a;
+  --emerald-2: #0d1428;
+  --emerald-3: #0f1e3d;
+  --emerald-4: #102650;
+  --emerald-5: #122e63;
+  --emerald-6: #173a7a;
+  --emerald-7: #1e4a95;
+  --emerald-8: #2560b5;
+  --emerald-9: #002470;
+  --emerald-10: #3a7ad4;
+  --emerald-11: #7aaff0;
+  --emerald-12: #c8dff8;
 
   /* Alpha variants */
-  --emerald-a1: rgba(0, 222, 69, 0.02);
-  --emerald-a2: rgba(0, 255, 168, 0.06);
-  --emerald-a3: rgba(0, 255, 162, 0.07); /* Figma Accent Alpha/3 = #00ffa212 */
-  --emerald-a4: rgba(0, 255, 170, 0.21);
-  --emerald-a5: rgba(0, 255, 176, 0.27);
-  --emerald-a6: rgba(32, 255, 187, 0.33);
-  --emerald-a7: rgba(53, 255, 196, 0.41);
-  --emerald-a8: rgba(66, 255, 203, 0.49);
-  --emerald-a9: rgba(4, 120, 87, 1);
-  --emerald-a10: rgba(80, 255, 208, 0.56);
-  --emerald-a11: rgba(136, 254, 206, 0.79); /* Figma Accent Alpha/11 = #88fececa */
-  --emerald-a12: rgba(184, 255, 240, 0.94);
+  --emerald-a1: rgba(0, 36, 112, 0.06);
+  --emerald-a2: rgba(0, 36, 112, 0.14);
+  --emerald-a3: rgba(0, 36, 112, 0.22);
+  --emerald-a4: rgba(0, 36, 112, 0.32);
+  --emerald-a5: rgba(0, 36, 112, 0.42);
+  --emerald-a6: rgba(20, 58, 140, 0.52);
+  --emerald-a7: rgba(30, 74, 149, 0.62);
+  --emerald-a8: rgba(37, 96, 181, 0.72);
+  --emerald-a9: rgba(0, 36, 112, 1);
+  --emerald-a10: rgba(58, 122, 212, 1);
+  --emerald-a11: rgba(122, 175, 240, 0.92);
+  --emerald-a12: rgba(200, 223, 248, 0.96);
 
   --emerald-contrast: #ffffff;
-  --emerald-surface: rgba(12, 49, 38, 0.5);
-  --emerald-indicator: #3dd9a0;
-  --emerald-track: #3dd9a0;
+  --emerald-surface: rgba(10, 20, 50, 0.5);
+  --emerald-indicator: #7aaff0;
+  --emerald-track: #7aaff0;
 
   --page-background: #111113;
   --file-icon-fill: #212225;
