@@ -50,8 +50,35 @@
 }
 
 /* ========================
+   PIP Design System Tokens
+   PI Partners brand colors
+   ======================== */
+
+:root {
+  --pip-navy: #002470;
+  --pip-deep-ink: #00122A;
+  --pip-royal-blue: #0158B5;
+  --pip-mid-blue: #0070C0;
+  --pip-light-blue: #629DD1;
+  --pip-lightest: #9AC4F8;
+  --pip-accent-blue: #66A1FF;
+  --pip-signal-teal: #14B8C8;
+  --pip-cyan-glow: #38E0E8;
+  --pip-logo-teal: #2EE6D6;
+  --pip-logo-cyan: #2DD4FF;
+  --pip-teal-deep: #0F7281;
+  --pip-ink: #1A1A2E;
+  --pip-ink-meta: #585858;
+  --pip-ink-muted: #555555;
+  --pip-paper: #F5F8FC;
+  --pip-fill-soft: #EEF4FB;
+  --pip-rule: #D9D9D9;
+  --pip-white: #FFFFFF;
+}
+
+/* ========================
    Custom Accent Color Scale
-   Base color: #047857 (Emerald)
+   Base color: #002470 (PIP Navy)
    ======================== */
 
 /* Light Mode */

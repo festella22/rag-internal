@@ -16,10 +16,10 @@ export default function PasswordResetSuccess() {
     <Box style={{ width: '100%', maxWidth: '440px' }}>
       <Box style={{ marginBottom: '24px' }}>
         <Image
-          src="/login-page-assets/pipeshub/white-square.svg"
-          alt="Pipeshub"
-          width={48}
-          height={48}
+          src="/pip-logo-blue.svg"
+          alt="PI Partners"
+          width={120}
+          height={32}
         />
       </Box>
 
@@ -36,7 +36,7 @@ export default function PasswordResetSuccess() {
           Your password has been changed!
         </Text>
         <Text style={{ color: 'var(--gray-11)', fontSize: '14px', lineHeight: '20px' }}>
-          Your password has been successfully updated. You can now sign in to your Pipeshub
+          Your password has been successfully updated. You can now sign in to your PI Partners
           workspace with your new password.
         </Text>
       </Flex>

@@ -202,7 +202,7 @@ export function ChatSidebar() {
     >
       {/* Header */}
       <Flex align="center" justify="between" style={{ padding: '0 var(--space-3)', height: 'var(--space-7)' }}>
-        <PipesHubIcon size={24} color="var(--accent-8)" />
+        <PipesHubIcon size={24} />
         <Box
           style={{
             width: 'var(--space-5)',

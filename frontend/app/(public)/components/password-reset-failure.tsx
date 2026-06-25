@@ -26,10 +26,10 @@ export default function PasswordResetFailure({
     <Box style={{ width: '100%', maxWidth: '440px' }}>
       <Box style={{ marginBottom: '24px' }}>
         <Image
-          src="/login-page-assets/pipeshub/white-square.svg"
-          alt="Pipeshub"
-          width={48}
-          height={48}
+          src="/pip-logo-blue.svg"
+          alt="PI Partners"
+          width={120}
+          height={32}
         />
       </Box>
 

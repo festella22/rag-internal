@@ -11,104 +11,29 @@ interface PipesHubIconProps {
 
 export function PipesHubIcon({
   size = 80,
-  color = 'currentColor',
   style,
   className,
 }: PipesHubIconProps) {
+  // Renders the PIP logo mark (chevron / arrow geometry, no wordmark)
   return (
     <svg
       width={size}
       height={size}
-      viewBox="0 0 80 80"
+      viewBox="0 0 62 45"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ color, display: 'inline-flex', flexShrink: 0, ...style }}
+      style={{ display: 'inline-flex', flexShrink: 0, ...style }}
       className={className}
     >
-      <g filter="url(#pipeshub-icon-shadow)">
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M57.2562 11.7113V23.5185L68.9959 23.5185V11.7113L57.2562 11.7113Z"
-          fill="currentColor"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M57.2562 58.7458V70.553L68.9959 70.553V58.7458H57.2562Z"
-          fill="currentColor"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M11.6439 11.7113V23.5185L23.3835 23.5185L23.3835 11.7113L11.6439 11.7113Z"
-          fill="currentColor"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M11.6439 58.7458V70.553L23.3835 70.553L23.3835 58.7458H11.6439Z"
-          fill="currentColor"
-        />
-        <path
-          d="M17.7811 40.6901L8.89057 31.7484L0 40.6901L8.89058 49.6318L17.7811 40.6901Z"
-          fill="currentColor"
-        />
-        <path
-          d="M40.4576 62.1166L49.3481 71.0583L40.4576 80L31.567 71.0583L40.4576 62.1166Z"
-          fill="currentColor"
-        />
-        <path
-          d="M71.1095 31.7484L80 40.6901L71.1095 49.6318L62.2189 40.6901L71.1095 31.7484Z"
-          fill="currentColor"
-        />
-        <path
-          d="M40.4576 0L49.3481 8.9417L40.4576 17.8834L31.567 8.9417L40.4576 0Z"
-          fill="currentColor"
-        />
-        <path
-          d="M40.0438 31.7866L48.9343 40.7283L40.0438 49.67L31.1532 40.7283L40.0438 31.7866Z"
-          fill="currentColor"
-        />
-      </g>
+      <path d="M13.1124 34.9688L43.2609 4.79464L47.8552 9.38497L17.7066 39.5591L13.1124 34.9688Z" fill="#002470" />
+      <path d="M13.1124 34.9688L43.2609 4.79464L47.8552 9.38497L17.7066 39.5591L13.1124 34.9688Z" fill="url(#pip-mark-gradient)" />
+      <path d="M42.4999 38.7702L32.7744 29.0447L37.3107 24.5083L44.7845 31.9493L53.074 23.6598L45.6982 16.2842L50.2346 11.7151L59.8946 21.3753C60.4822 21.9628 60.841 22.8113 60.841 23.6598C60.841 24.5083 60.4822 25.3243 59.8946 25.9443L47.0687 38.7702C46.4487 39.3902 45.6654 39.7166 44.7845 39.7166C43.9357 39.684 43.12 39.3576 42.4999 38.7702Z" fill="#002470" />
+      <path d="M0.954594 22.7787C-0.318198 21.5059 -0.318198 19.4825 0.954594 18.2097L13.8131 5.3512C15.0532 4.11104 17.1093 4.11104 18.3494 5.3512L28.0749 15.0766L23.5059 19.6456L16.0649 12.2047L7.77545 20.4942L15.1511 27.8699L10.6148 32.4388L0.954594 22.7787Z" fill="#002470" />
       <defs>
-        <filter
-          id="pipeshub-icon-shadow"
-          x="0"
-          y="0"
-          width="80"
-          height="81.5"
-          filterUnits="userSpaceOnUse"
-          colorInterpolationFilters="sRGB"
-        >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
-          <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-          <feColorMatrix
-            in="SourceAlpha"
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-            result="hardAlpha"
-          />
-          <feOffset dy="1.5" />
-          <feGaussianBlur stdDeviation="1" />
-          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
-          <feColorMatrix
-            type="matrix"
-            values="0 0 0 0 0.847059 0 0 0 0 0.956863 0 0 0 0 0.964706 0 0 0 0.0352941 0"
-          />
-          <feBlend mode="normal" in2="shape" result="effect1_innerShadow" />
-          <feColorMatrix
-            in="SourceAlpha"
-            type="matrix"
-            values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-            result="hardAlpha"
-          />
-          <feOffset dy="1.5" />
-          <feGaussianBlur stdDeviation="1" />
-          <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
-          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0" />
-          <feBlend mode="normal" in2="effect1_innerShadow" result="effect2_innerShadow" />
-        </filter>
+        <linearGradient id="pip-mark-gradient" x1="45.6113" y1="7.14301" x2="11.6374" y2="32.1607" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#6798FF" />
+          <stop offset="1" stopColor="#09FFE7" />
+        </linearGradient>
       </defs>
     </svg>
   );

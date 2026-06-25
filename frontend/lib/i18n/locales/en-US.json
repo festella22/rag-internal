@@ -1455,7 +1455,7 @@
       "selectPrompt": "Select an archived chat to preview",
       "restore": "Restore",
       "permanentlyDelete": "Permanently Delete",
-      "deleteConfirmMessage": "This chat will be permanently deleted from Pipeshub. Any shared access will be lost.",
+      "deleteConfirmMessage": "This chat will be permanently deleted from PI Partners. Any shared access will be lost.",
       "restoreSuccess": "Chat restored",
       "restoreError": "Failed to restore chat",
       "deleteSuccess": "Deleted Successfully",
@@ -1663,7 +1663,7 @@
       },
       "successDialog": {
         "title": "Instance is configured and ready to sync!",
-        "description": "You can start syncing your {{name}} data with Pipeshub now,",
+        "description": "You can start syncing your {{name}} data with PI Partners now,",
         "descriptionSuffix": "or choose to do it later from settings.",
         "later": "I'll do it later",
         "startSync": "Start Syncing Now"
@@ -2637,7 +2637,7 @@
         "title": "How PIP assigns permissions",
         "description": "PIP uses your email to identify you across the platform and all connected apps.",
         "permissionsTitle": "Permissions mirror your native apps",
-        "permissionsBody": "The access you have inside PipesHub is the same as in each connected app — no more, no less. If a document is restricted in Google Drive, it stays restricted here.",
+        "permissionsBody": "The access you have inside PI Partners is the same as in each connected app — no more, no less. If a document is restricted in Google Drive, it stays restricted here.",
         "emailNotePre": "Make sure the email you registered with —",
         "emailNotePost": "— is the same one used in your organization's apps so your permissions are recognized correctly.",
         "cancelButton": "Cancel",
