@@ -25,6 +25,7 @@ interface NavItem {
 /** Primary navigation items — labels resolved via i18n */
 const MAIN_NAV_ITEMS: NavItem[] = [
   { icon: 'folder', labelKey: 'nav.collections', route: '/knowledge-base/' },
+  { icon: 'electrical_services', labelKey: 'nav.connectors', route: '/workspace/connectors/' },
 ];
 
 // ========================================
