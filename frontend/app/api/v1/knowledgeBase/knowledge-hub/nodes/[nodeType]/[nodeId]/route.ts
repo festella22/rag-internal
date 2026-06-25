@@ -42,7 +42,7 @@ export async function GET(
       id: c.id,
       name: c.name,
       nodeType: 'recordGroup',
-      parentId: nodeId,
+      parentId: `apps/${nodeId}`,
       origin: 'COLLECTION',
       connector: 'KB',
       subType: 'KB',
