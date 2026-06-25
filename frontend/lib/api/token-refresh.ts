@@ -109,8 +109,8 @@ export async function refreshAccessToken(): Promise<boolean> {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${refreshToken}`,
         },
+        body: JSON.stringify({ refreshToken }),
       });
 
       if (!response.ok) {
