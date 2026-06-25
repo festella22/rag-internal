@@ -7,6 +7,7 @@ import { toast } from '@/lib/store/toast-store';
 import { fetchAndSetCurrentUser } from '@/lib/auth/hydrate-user';
 import { AuthApi } from '../api';
 import { getApiBaseUrl } from '@/lib/utils/api-base-url';
+import { createClient } from '@/lib/supabase/client';
 import {
   getUserAccountApiErrorMessage,
   getUserAccountApiResponseMessage,
@@ -158,6 +159,10 @@ export function useAuthActions({
   }, []);
 
   // ── Password sign-in ────────────────────────────────────────────────────────
+  //
+  // Signs in directly via the Supabase browser client, bypassing the Next.js
+  // API route. This avoids the Vercel serverless function cold-start + 10-second
+  // execution limit that caused timeouts when going browser → Vercel → Supabase.
 
   const signInWithPassword = useCallback(
     async (password: string) => {
@@ -166,23 +171,40 @@ export function useAuthActions({
       setError(null);
 
       try {
-        const response = await AuthApi.signInWithPassword(email, password);
+        const supabase = createClient();
+        const { data, error: supabaseError } = await supabase.auth.signInWithPassword({
+          email: email.trim(),
+          password,
+        });
 
-        if (response.accessToken && response.refreshToken) {
-          setTokens(response.accessToken, response.refreshToken);
-          if (response.user) {
-            setUser(response.user);
+        if (supabaseError) {
+          const msg = supabaseError.message ?? 'Sign in failed. Please try again.';
+          const lower = msg.toLowerCase();
+          const kind: AuthErrorKind =
+            lower.includes('invalid') || lower.includes('credentials') || lower.includes('email') || lower.includes('password')
+              ? 'wrongPassword'
+              : 'generic';
+          toast.error(kind === 'wrongPassword' ? 'Incorrect email or password.' : msg, { showCloseButton: true });
+          setError({ type: kind, message: kind === 'wrongPassword' ? 'Incorrect email or password.' : msg });
+          return;
+        }
+
+        if (data.session) {
+          setTokens(data.session.access_token, data.session.refresh_token);
+          if (data.user) {
+            setUser({
+              id: data.user.id,
+              email: data.user.email ?? '',
+              name: data.user.user_metadata?.full_name ?? data.user.email ?? '',
+              created_at: data.user.created_at,
+            });
           }
-          // Store email for returning-user auto-login
           if (typeof window !== 'undefined') {
             localStorage.setItem('pipeshub_last_email', email);
           }
           router.push(postAuthRedirectTo);
         } else {
-          setError({
-            type: 'generic',
-            message: response.message ?? 'Unexpected response. Please try again.',
-          });
+          setError({ type: 'generic', message: 'Unexpected response. Please try again.' });
         }
       } catch (err: unknown) {
         const kind = classifyAuthError(err);
